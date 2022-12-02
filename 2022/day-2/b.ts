@@ -21,30 +21,36 @@ const RESULT_POINTS: any = {
 	lose: 0,
 };
 
+const DESIRED_OUTCOME: any = {
+	X: "lose",
+	Y: "draw",
+	Z: "win",
+};
+
 const WIN_CONDITIONS: any = {
-	X: {
-		A: "draw",
-		B: "lose",
-		C: "win",
+	A: {
+		X: 3,
+		Y: 1,
+		Z: 2,
 	},
-	Y: {
-		A: "win",
-		B: "draw",
-		C: "lose",
+	B: {
+		X: 1,
+		Y: 2,
+		Z: 3,
 	},
-	Z: {
-		A: "lose",
-		B: "win",
-		C: "draw",
+	C: {
+		X: 2,
+		Y: 3,
+		Z: 1,
 	},
 };
 
 const main = (dataArray: any) => {
 	const result = dataArray
-		.map((game: any) => [game[1], WIN_CONDITIONS[game[1]][game[0]]])
+		.map((game: any) => [game[1], WIN_CONDITIONS[game[0]][game[1]]])
 		.map(
 			(result: any) =>
-				POINTS_PER_OPTION[result[0]] + RESULT_POINTS[result[1]]
+				RESULT_POINTS[DESIRED_OUTCOME[result[0]]] + result[1]
 		)
 		.reduce(add, 0);
 
